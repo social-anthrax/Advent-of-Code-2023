@@ -73,32 +73,32 @@ fn task1() -> usize {
     let input = get_task(3);
     let grid = parse_grid(&input);
 
-    let mut sum: usize = 0;
-    for (line_no, line) in grid.iter().enumerate() {
-        for ((start, end), chars) in line
-            .iter()
-            .enumerate()
-            .map(|(i, c)| c.is_numeric().then_some((i, c)))
-            .group_by(std::option::Option::is_some)
-            .into_iter()
-            .filter(|(k, _)| *k)
-            .map(|x| x.1.flatten())
-            .map(|f| {
-                let (i, c): (Vec<usize>, Vec<&char>) = f.unzip();
-                ((*i.first().unwrap(), *i.last().unwrap()), c)
-            })
-        {
-            if helper_1(&grid, line_no, start, end) {
-                sum += chars
-                    .iter()
-                    .copied()
-                    .collect::<String>()
-                    .parse::<usize>()
-                    .unwrap();
-            }
-        }
-    }
-    sum
+    grid.iter()
+        .enumerate()
+        .map(|(line_no, line)| {
+            line.iter()
+                .enumerate()
+                .map(|(i, c)| c.is_numeric().then_some((i, c)))
+                .group_by(std::option::Option::is_some)
+                .into_iter()
+                .filter(|(k, _)| *k)
+                .map(|x| x.1.flatten())
+                .map(|f| {
+                    let (i, c): (Vec<usize>, Vec<&char>) = f.unzip();
+                    ((*i.first().unwrap(), *i.last().unwrap()), c)
+                })
+                .filter(|((start, end), _)| helper_1(&grid, line_no, *start, *end))
+                .map(|(_, chars)| {
+                    chars
+                        .iter()
+                        .copied()
+                        .collect::<String>()
+                        .parse::<usize>()
+                        .unwrap()
+                })
+                .sum::<usize>()
+        })
+        .sum()
 }
 
 fn task2() -> usize {
