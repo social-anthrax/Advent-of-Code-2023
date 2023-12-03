@@ -5,8 +5,6 @@
 mod task_handler;
 mod tasks;
 
-use std::collections::HashMap;
-
 #[allow(clippy::wildcard_imports)]
 use tasks::*;
 

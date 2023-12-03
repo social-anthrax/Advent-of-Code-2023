@@ -51,7 +51,8 @@ fn txt_replace(task: &str) -> usize {
     sum
 }
 
-fn one_txtreplace(task: &str) -> usize {
+#[allow(dead_code)]
+fn txt_replace_golf(task: &str) -> usize {
     task.lines()
         .filter(|&x| !x.is_empty())
         .map(|line| {
@@ -82,7 +83,7 @@ fn one_txtreplace(task: &str) -> usize {
 mod test {
     use crate::{
         task_handler::get_task,
-        tasks::task1::{one_txtreplace, txt_replace},
+        tasks::task1::{txt_replace, txt_replace_golf},
     };
 
     use super::task2;
@@ -95,6 +96,6 @@ mod test {
     #[test]
     fn test_jank() {
         let input = get_task(1);
-        assert_eq!(one_txtreplace(&input), txt_replace(&input));
+        assert_eq!(txt_replace_golf(&input), txt_replace(&input));
     }
 }
