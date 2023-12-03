@@ -13,7 +13,7 @@ use tasks::*;
 type Callback = Box<dyn Fn()>;
 
 fn main() {
-    let x: Vec<(u8, Callback)> = vec![(1, Box::new(task1::tasks))];
+    let x: Vec<(u8, Callback)> = vec![(1, Box::new(task1::tasks)), (2, Box::new(task2::tasks))];
 
     let functions = x.into_iter().collect::<HashMap<u8, Callback>>();
     for (day, func) in &functions {
