@@ -13,11 +13,14 @@ use tasks::*;
 type Callback = Box<dyn Fn()>;
 
 fn main() {
-    let x: Vec<(u8, Callback)> = vec![(1, Box::new(task1::tasks)), (2, Box::new(task2::tasks))];
+    let functions: Vec<Callback> = vec![
+        Box::new(task1::tasks),
+        Box::new(task2::tasks),
+        Box::new(task3::tasks),
+    ];
 
-    let functions = x.into_iter().collect::<HashMap<u8, Callback>>();
-    for (day, func) in &functions {
-        println!("\x1b[93mDay {day} \x1b[0m");
+    for (day, func) in functions.iter().enumerate() {
+        println!("\x1b[93mDay {} \x1b[0m", day + 1);
         func();
     }
 }
