@@ -1,7 +1,3 @@
-#![warn(clippy::all)]
-#![warn(clippy::pedantic)]
-#![warn(clippy::nursery)]
-
 mod task_handler;
 mod tasks;
 
@@ -15,6 +11,7 @@ fn main() {
         Box::new(task1::tasks),
         Box::new(task2::tasks),
         Box::new(task3::tasks),
+        Box::new(task4::tasks),
     ];
 
     for (day, func) in functions.iter().enumerate() {

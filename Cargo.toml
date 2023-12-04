@@ -10,3 +10,8 @@ itertools = "0.12.0"
 rayon = "1.8.0"
 regex = "1.10.2"
 reqwest = { version = "0.11.22", features = ["blocking", "cookies"] }
+
+[lints.clippy]
+all = "warn"
+pedantic = "warn"
+nursery = "warn"
